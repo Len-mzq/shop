@@ -1,0 +1,149 @@
+.header {
+	height: 110px;
+	background: url(//misc.360buyimg.com/user/reg/3.0.0/css/i/headbg.jpg) repeat-x left bottom;
+}
+
+.header .logo-title {
+	float: left;
+	height: 34px;
+	line-height: 34px;
+	font-size: 24px;
+	color: #333;
+	margin-top: 34px;
+	margin-left: 200px;
+}
+
+.header .have-account {
+	font-size: 16px;
+	float: right;
+	margin-top: 55px;
+	margin-right: 80px;
+	color: #999;
+}
+
+.header .have-account a {
+	color: #e22;
+}
+
+.main {
+	margin: 50px auto 186px;
+	width: 400px;
+}
+#message{
+    width: 327px;
+    height: 20px;
+	color: red;
+	padding:2px 0px 2px 140px;
+}
+
+#message i {
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin-left: -17px;
+    margin-top: 1px;
+    background: url(//pic.c-ctrip.com/platform/online/register/un_reg_7.4.png) no-repeat 0 -9999em;
+    background-position: 0 -321px;
+    vertical-align: middle;
+}
+.form-item {
+	position: relative;
+	margin-top: 15px;
+	width: 500px;
+	height: 70px;
+}
+
+.form-item label {
+	float: left;
+	font-size: large;
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	padding-left: 20px;
+}
+
+.form-item input {
+	font-size: large;
+	float: left;
+	width: 250px;
+	height: 40px;
+	line-height: 50px;
+	padding-left: 20px;
+}
+
+.btn-register {
+	margin-left: 20px;
+	width: 370px;
+	height: 45px;
+	line-height: 48px;
+	text-align: center;
+	color: #fff;
+	background: #e2231a;
+	border: 0;
+	font-size: 16px;
+	font-family: "Microsoft YaHei", "Hiragino Sans GB";
+	cursor: pointer;
+}
+
+.reg-other {
+	margin-top: 28px;
+}
+
+.reg-other .reg-other-person {
+	float: left;
+	margin-left: 20px;
+}
+
+.reg-other .reg-other-inter {
+	float: right;
+	margin-right: 10px;
+}
+
+.reg-other .reg-other-item {
+	color: #333;
+	cursor: pointer;
+}
+
+.reg-other .reg-ohter-icon {
+	background: url(//misc.360buyimg.com/user/reg/3.0.0/css/i/reg-icon.png) no-repeat;
+}
+
+.reg-other .reg-ohter-icon {
+	display: inline-block;
+	margin: 0 8px 2px 0;
+	vertical-align: middle;
+	width: 26px;
+	height: 26px;
+	background-position: 0 -160px;
+}
+
+.reg-other .reg-other-inter .reg-ohter-icon {
+	background-position: -40px -160px;
+}
+
+
+#footer-2018 {
+		padding-bottom: 30px;
+		text-align: center;
+		position: relative;
+		top: -80px;
+	}
+	
+	#footer-2018 .copyright {
+		margin: 10px 0;
+	}
+	
+	#copyright {
+		font-size: 12px;
+		position: relative;
+		top: 15px;
+	}
+	
+	#footer-2018 .links a,
+	#footer-2018 .links span {
+		margin: 0 10px;
+		font-size: 15px;
+	}
+	#footer-2018 .links a:hover{
+		color: red;
+	}
