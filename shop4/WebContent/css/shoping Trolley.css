@@ -1,0 +1,292 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#daoHangLan {
+	height: 30px;
+	background-color: #e3e4e5;
+	position: relative;
+}
+
+.c1 {
+	list-style: none;
+	position: absolute;
+	left: 60px;
+}
+
+.c2 {
+	width: 80px;
+	height: 30px;
+	list-style: none;
+	float: left;
+	font: "宋体";
+	font-size: smaller;
+	line-height: 30px;
+	text-align: center;
+	color: gray;
+}
+
+#home {
+	width: 80px;
+	height: 30px;
+	list-style: none;
+	float: left;
+	font: "宋体";
+	font-size: smaller;
+	line-height: 30px;
+	text-align: center;
+	color: gray;
+}
+
+#home a:hover {
+	color: red;
+	cursor: pointer;
+	margin-right: 5px;
+}
+
+#mycity {
+	list-style: none;
+	float: left;
+	font: "宋体";
+	font-size: smaller;
+	line-height: 30px;
+	text-align: center;
+	color: gray;
+}
+
+#login {
+	width: 80px;
+	height: 30px;
+	list-style: none;
+	float: left;
+	position: absolute;
+	left: 550px;
+	font: "宋体";
+	font-size: smaller;
+	line-height: 30px;
+	text-align: center;
+	color: gray;
+}
+
+.link-regist {
+	float: left;
+	position: relative;
+	left: 80px;
+	top: -30px;
+	color: red;
+}
+
+.icon-shuxian {
+	width: 80px;
+	height: 30px;
+	list-style: none;
+	float: left;
+	position: absolute;
+	font: "宋体";
+	font-size: smaller;
+	line-height: 30px;
+	text-align: center;
+	color: gray;
+}
+
+#shuxian1 {
+	position: absolute;
+	left: 652px;
+}
+
+#shuxian2 {
+	position: absolute;
+	left: 725px;
+}
+
+#shuxian3 {
+	position: absolute;
+	left: 810px;
+}
+
+#shuxian4 {
+	position: absolute;
+	left: 882px;
+}
+
+#shuxian5 {
+	position: absolute;
+	left: 970px;
+}
+
+#shuxian6 {
+	position: absolute;
+	left: 1053px;
+}
+
+#shuxian7 {
+	position: absolute;
+	left: 1137px;
+}
+
+#dingdan {
+	position: absolute;
+	left: 704px;
+}
+
+#myjd {
+	position: absolute;
+	left: 777px;
+}
+
+#xiangxia1 {
+	position: absolute;
+	left: 830px;
+}
+
+#xiangxia2 {
+	position: absolute;
+	left: 990px;
+}
+
+#xiangxia3 {
+	position: absolute;
+	left: 1073px;
+}
+
+#xiangxia4 {
+	position: absolute;
+	left: 1155px;
+}
+
+#member {
+	position: absolute;
+	left: 863px;
+}
+
+#buy {
+	position: absolute;
+	left: 935px;
+}
+
+#servies {
+	position: absolute;
+	left: 1020px;
+}
+
+#wangdao {
+	position: absolute;
+	left: 1103px;
+}
+
+#phone {
+	position: absolute;
+	left: 1187px;
+}
+
+.w {
+	width: 990px;
+	margin: 0 auto;
+}
+
+#logo-2018 {
+	position: relative;
+	z-index: 12;
+	float: left;
+	width: 276px;
+	height: 50px;
+	margin: 15px 0 22px;
+}
+
+#logo-2018 .logo {
+	margin-top: 2px;
+	margin-left: -30px;
+	width: 134px;
+	height: 42px;
+}
+
+#search {
+	position: relative;
+	z-index: 11;
+	float: left;
+	width: 384px;
+	margin: 27px 30px 0 95px;
+}
+
+#search .form {
+	width: 384px;
+	height: 30px;
+	position: relative;
+	left: 300px;
+}
+
+#souText {
+	padding-right: 44px;
+	float: left;
+	width: 294px;
+	height: 18px;
+	line-height: 24px;
+	color: #999;
+	padding: 4px;
+	margin-bottom: 4px;
+	border-width: 2px 0 2px 2px;
+	border-color: #f30213;
+	border-style: solid;
+	outline: 0;
+	font-size: 12px;
+}
+
+#search .button {
+	float: left;
+	width: 80px;
+	height: 30px;
+	font-family: tahoma, arial, Microsoft YaHei, Hiragino Sans GB, "\u5b8b\u4f53", sans-serif;
+	background: #f30213;
+	border: none;
+	border-radius: 0;
+	line-height: 1;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.w {
+	width: 990px;
+	margin: 0 auto;
+}
+
+.cart-filter-bar {
+	margin-top: 10px;
+	position: relative;
+}
+
+.cart-filter-bar .switch-cart {
+	float: left;
+	position: relative;
+	height: 26px;
+	overflow: hidden;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+.cart-filter-bar .switch-cart li.curr,
+.cart-filter-bar .switch-cart li.curr a {
+	color: #e4393c;
+}
+
+.cart-filter-bar .switch-cart li {
+	float: left;
+	position: relative;
+	font-weight: 700;
+	font-size: 16px;
+	height: 26px;
+	line-height: 26px;
+	text-align: center;
+	padding: 0 0 10px;
+	cursor: pointer;
+	margin: 5px 30px 0 0;
+}
+
+.cart-filter-bar .switch-cart li .number {
+	font-family: verdana;
+	font-size: 14px;
+}

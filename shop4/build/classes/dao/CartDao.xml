@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.CartDao">
+	<resultMap type="entity.Product" id="ProductResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="remark" column="remark" />
+		<result property="inventory" column="inventory" />
+		<result property="sales_volume" column="sales_volume" />
+		<result property="title" column="title" />
+		<result property="store" column="store" />
+		<result property="icons" column="icons" />
+		<result property="category_id" column="category_id" />
+	</resultMap>
+
+	<!-- 往购物车和商品的关系表中添加数据 -->
+	<insert id="add">
+		insert into pro_cart (cart_id,pro_id,amount)
+		value(#{0},#{1},#{2})
+	</insert>
+
+	<!-- 查询购物车和商品的关系表中商品的数量 -->
+	<select id="searchAmount" resultType="java.lang.Integer">
+		select amount from pro_cart
+		where cart_id=#{0} and pro_id=#{1}
+	</select>
+
+	<!-- 更新购物车和商品的关系表中数据 -->
+	<update id="updatePro_cart">
+		update pro_cart set amount=(#{2}+#{3}) where
+		cart_id=#{0}
+		and pro_id=#{1}
+	</update>
+	
+	<!-- 更新购物车和商品的关系表中数据 (+/-)-->
+	<update id="updatePro_cart2">
+		update pro_cart set amount=(#{2}) where
+		cart_id=#{0}
+		and pro_id=#{1}
+	</update>
+
+	<!-- 删除购物车和商品的关系表中数据-->
+	<delete id="deletePro_cart">
+		delete from pro_cart where
+		cart_id=#{0}
+		and pro_id=#{1}
+	</delete>
+
+	<!-- 把商品添加到购物车 -->
+	<insert id="addToCart">
+		insert into t_cart (amount,price)
+		value(#{0},#{1})
+	</insert>
+
+	<!-- 查询购物车中商品的数量 -->
+	<select id="searchAmountInCart" resultType="java.lang.Integer">
+		select amount from t_cart where id=#{0}
+	</select>
+	
+	<!-- 查询购物车中商品的价格 -->
+	<select id="searchPriceInCart" resultType="java.lang.Integer">
+		select price from t_cart where id=#{0}
+	</select>
+	
+	<!-- 查询购物车中商品的信息 -->
+	<select id="searchAllInCart" resultType="entity.Cart">
+		select * from t_cart where id=#{0}
+	</select>
+
+	<!-- 更新购物车 -->
+	<update id="updateCart">
+		update t_cart set amount=(#{0}+#{3}),price=(#{1}+#{4}) where id=#{2}
+	</update>
+
+	<!-- 根据用户名查用户id -->
+	<select id="searchUserId" resultType="java.lang.Integer">
+		select id from t_user where
+		username=#{username};
+	</select>
+
+	<!-- 根据用户名查用户cart_id -->
+	<select id="searchCart_id" resultType="java.lang.Integer">
+		select cart_id from t_user
+		where username=#{username};
+	</select>
+
+	<!-- 查询cart_id是否已经存在 -->
+	<select id="searchCart_idExit" resultType="java.lang.Integer">
+		select cart_id from
+		t_user where cart_id=#{cart_id};
+	</select>
+
+	<!-- 查询购物车里商品是否已经存在 -->
+	<select id="searchPro_idExit" resultType="java.lang.Integer">
+		select pro_id from
+		pro_cart where pro_id=#{0} and cart_id=#{1};
+	</select>
+
+</mapper> 
+    

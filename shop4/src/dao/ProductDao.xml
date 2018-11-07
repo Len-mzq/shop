@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ProductDao">
+<resultMap type="entity.Product" id="productResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="remark" column="remark" />
+		<result property="inventory" column="inventory" />
+		<result property="sales_volume" column="sales_volume" />
+		<result property="title" column="title" />
+		<result property="store" column="store" />
+		<result property="icons" column="icons" />
+		<result property="category_id" column="category_id" />
+		<result property="amount" column="amount" />
+		<collection property="imgs" ofType="entity.Img">
+			<id property="id" column="iid" />
+			<result property="path" column="path" />
+			<result property="order" column="order" />
+			<result property="product_id" column="product_id" />
+		</collection>
+	</resultMap>
+
+
+	<resultMap type="entity.Product" id="productResultMap2">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="remark" column="remark" />
+		<result property="inventory" column="inventory" />
+		<result property="sales_volume" column="sales_volume" />
+		<result property="title" column="title" />
+		<result property="store" column="store" />
+		<result property="icons" column="icons" />
+		<result property="category_id" column="category_id" />
+		<collection property="imgs" ofType="entity.Img">
+			<id property="id" column="iid" />
+			<result property="path" column="path" />
+			<result property="order" column="order" />
+			<result property="product_id" column="product_id" />
+		</collection>
+		<!-- </association> -->
+	</resultMap>
+
+	<!--根据条件查询数据库t_product表中的内容，分页 -->
+	<select id="searchByCondition" resultMap="productResultMap2">
+		select p.*,i.id as iid,i.path,i.order from t_product as p LEFT JOIN
+		t_img as i ON p.id=i.product_id where 1=1
+		<if test="pro.name != null and pro.name!='' ">
+			AND name like '%${pro.name}%'
+		</if>
+		limit #{startIndex},#{pageSize}
+	</select>
+
+	<!--根据id查询某一件商品的详情 -->
+	<select id="searchById" resultMap="productResultMap2">
+		select p.*,i.id as
+		iid,i.path,i.order from t_product as p LEFT JOIN
+		t_img as i ON
+		p.id=i.product_id where p.id=#{id} ORDER BY i.order
+	</select>
+
+	<!--根据ids查询部分商品的详情 -->
+	<select id="searchByIds" resultMap="productResultMap">
+		select p.*,i.id as iid,i.path,i.order,amount from t_product as p LEFT JOIN
+		t_img as i ON p.id=i.product_id LEFT JOIN pro_cart on p.id=pro_id
+		where p.id in(select pro_id from pro_cart where cart_id=#{cart_id})
+		ORDER BY i.order
+	</select>
+
+	<!--按条件查询到的商品总数 -->
+	<select id="getSearchCount" resultType="java.lang.Integer">
+		SELECT COUNT(0) FROM t_product where 1=1
+		<if test="name != null and name!='' ">
+			AND name like '%${name}%'
+		</if>
+	</select>
+
+	<!--根据商品id查询商品图片 -->
+	<select id="searchImg" resultType="entity.Img">
+		select * from t_img where
+		product_id=${id};
+	</select>
+
+	<!--往数据库添加商品 -->
+	<insert id="add">
+
+	</insert>
+
+	<!--删除商品 -->
+	<delete id="deleteBatch">
+		delete from t_product where id in
+		<foreach collection="array" item="empId" open="(" close=")"
+			separator=",">
+			#{empId,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<!--修改商品 -->
+	<update id="update" parameterType="entity.Product">
+
+	</update>
+
+</mapper> 
+    

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.UserDao">
+
+	<!--查询用户是否已经存在 -->
+	<select id="searchAll" resultType="entity.User">
+		select * from t_user where
+		username=#{0} and password=#{1};
+	</select>
+
+	<!-- 查询电话号是否已经存在 -->
+	<select id="searchPhone" resultType="Integer">
+		select id from t_user
+		where
+		phone=#{phone};
+	</select>
+
+	<!-- 查询昵称是否已经存在 -->
+	<select id="searchNickName" resultType="Integer">
+		select id from t_user
+		where nickname=#{nickname};
+	</select>
+
+	<!-- 查询用户名是否已经存在 -->
+	<select id="searchUserName" resultType="Integer">
+		select id from t_user
+		where username=#{username};
+	</select>
+
+	<!-- 查询用户注册时间 -->
+	<select id="searchTime" resultType="String">
+		select time from t_user where
+		username=#{username};
+	</select>
+
+	<!-- 创建一个新的购物车 -->
+	<insert id="creatCart" useGeneratedKeys="true" keyProperty="id">
+		insert into t_cart value();
+	</insert>
+
+	<!-- 用户注册 -->
+	<insert id="add">
+		insert into t_user (phone,nickname,username,password,cart_id)
+		value(#{phone},#{nickname},#{username},#{password},#{cart_id})
+	</insert>
+
+</mapper> 
+    

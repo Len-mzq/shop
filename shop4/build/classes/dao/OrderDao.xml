@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.OrderDao">
+	<resultMap type="entity.Product" id="productResultMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="remark" column="remark" />
+		<result property="inventory" column="inventory" />
+		<result property="sales_volume" column="sales_volume" />
+		<result property="title" column="title" />
+		<result property="store" column="store" />
+		<result property="icons" column="icons" />
+		<result property="category_id" column="category_id" />
+		<result property="amount" column="amount" />
+		<collection property="imgs" ofType="entity.Img">
+			<id property="id" column="iid" />
+			<result property="path" column="path" />
+			<result property="order" column="order" />
+			<result property="product_id" column="product_id" />
+		</collection>
+	</resultMap>
+
+	<resultMap type="entity.Orders" id="OrderMap">
+		<id property="id" column="oId" />
+		<result property="address_id" column="oAddreId" />
+		<result property="order_num" column="oNum" />
+		<result property="total_price" column="oTotal" />
+		<result property="create_time" column="oCTime" />
+		<collection property="listOrderItem" ofType="entity.OrdersItem">
+			<id property="id" column="oiId" />
+			<result property="amount" column="oiAmount" />
+			<association property="product" javaType="entity.Product">
+				<id property="id" column="pId" />
+				<result property="price" column="pPrice" />
+				<result property="name" column="pName" />
+				<result property="title" column="pTitle" />
+				<collection property="imgs" ofType="entity.Img">
+					<id property="id" column="iId" />
+					<result property="path" column="iPath" />
+				</collection>
+			</association>
+		</collection>
+	</resultMap>
+
+
+	<!--根据ids查询部分商品的详情 -->
+	<select id="searchByProduct_id" resultMap="productResultMap">
+		select p.*,i.id as
+		iid,i.path,i.order,amount from t_product as p LEFT JOIN
+		t_img as i ON
+		p.id=i.product_id LEFT JOIN pro_cart on p.id=pro_id
+		where p.id
+		in(${product_id})
+		ORDER BY i.order
+	</select>
+	
+	<!--根据订单id查询部分商品的详情 -->
+	<select id="searchByOrder_id" resultMap="productResultMap">
+		select p.*,i.id as
+		iid,i.path,i.order,amount from t_product as p LEFT JOIN
+		t_img as i ON
+		p.id=i.product_id LEFT JOIN pro_cart on p.id=pro_id
+		where p.id
+		in(select product_id from t_order_item where order_id=#{orderId})
+		ORDER BY i.order
+	</select>
+
+	<!--查询地址 -->
+	<select id="searchAddress" resultType="entity.Address">
+		select
+		ad.*,province,city,area from t_address as
+		ad LEFT JOIN t_area as a ON
+		a.areaID=ad.areaID LEFT JOIN t_city as c
+		ON a.father=c.cityID LEFT JOIN
+		t_province as p ON
+		c.father=p.provinceID where user_id=#{user_id}
+	</select>
+
+	<!--查询省 -->
+	<select id="searchProvince" resultType="entity.Province">
+		select * from t_province
+	</select>
+
+	<!--查询市 -->
+	<select id="searchCityByProvince" resultType="entity.City">
+		select * from
+		t_city where father=#{0}
+	</select>
+
+	<!--查询区 -->
+	<select id="searchAreaByCity" resultType="entity.Area">
+		select * from t_area
+		where father=#{0}
+	</select>
+
+	<!-- 新增地址 -->
+	<insert id="addAddress">
+		insert into t_address
+		(user_id,street,person,phone,areaID)
+		value(#{0},#{1},#{2},#{3},#{4})
+	</insert>
+
+	<!-- 删除地址 -->
+	<delete id="deleteAddress">
+		delete from t_address where id=#{0}
+	</delete>
+
+	<!-- 往订单表t_order插入数据 -->
+	<insert id="addT_order">
+		insert into t_order (total_price, create_time,
+		order_num, address_id,isPay)
+		value(#{0},#{1},#{2},#{3},0)
+	</insert>
+
+	<!-- 往订单详情表t_order_item插入数据 -->
+	<insert id="addT_order_item">
+		insert into t_order_item (amount, order_id,
+		product_id)
+		value(#{0},#{1},#{2})
+	</insert>
+
+	<!--查询订单表t_order -->
+	<!-- <select id="searchT_order" resultType="entity.Orders"> -->
+	<!-- select * from t_order -->
+	<!-- </select> -->
+
+
+	<!--查询订单表t_order (未付款)-->
+	<select id="searchT_order" resultMap="OrderMap">
+		select o.id as
+		oId,o.address_id as oAddreId,o.total_price as oTotal,o.create_time as
+		oCTime,o.order_num as
+		oNum,oi.id as oiId,oi.amount as oiAmount,p.id as
+		pId,p.price as
+		pPrice,p.name as pName,p.title as pTitle,i.id as
+		iId,i.path as iPath
+		from t_order as o LEFT JOIN t_order_item as oi on
+		o.id=order_id LEFT
+		JOIN t_product as p on
+		product_id=p.id LEFT JOIN
+		t_img as i ON
+		p.id=i.product_id where o.isPay=0 ORDER BY i.order
+	</select>
+	
+	<!--查询订单表t_order (已付款)-->
+	<select id="searchT_orderIsPay" resultMap="OrderMap">
+		select o.id as
+		oId,o.address_id as oAddreId,o.total_price as oTotal,o.create_time as
+		oCTime,o.order_num as
+		oNum,oi.id as oiId,oi.amount as oiAmount,p.id as
+		pId,p.price as
+		pPrice,p.name as pName,p.title as pTitle,i.id as
+		iId,i.path as iPath
+		from t_order as o LEFT JOIN t_order_item as oi on
+		o.id=order_id LEFT
+		JOIN t_product as p on
+		product_id=p.id LEFT JOIN
+		t_img as i ON
+		p.id=i.product_id where o.isPay=1 ORDER BY i.order
+	</select>
+
+
+	<!--查询订单详情表t_order_item -->
+	<select id="searchT_order_item" resultMap="productResultMap">
+		select p.*,amount,path
+		from t_order_item LEFT JOIN t_product as p on
+		product_id=p.id LEFT JOIN
+		t_img as i ON p.id=i.product_id ORDER BY
+		i.order
+	</select>
+
+	<!--根据订单创建时间获得订单id -->
+	<select id="searchIdByTime" resultType="Integer">
+		select id from t_order
+		where create_time=#{0}
+	</select>
+	
+	<!-- 删除订单 -->
+	<delete id="deleteOrder">
+		delete from t_order where id=#{0}
+	</delete>
+	
+	<!-- 删除订单详情 -->
+	<delete id="deleteOrderItem">
+		delete from t_order_item where order_id=#{0}
+	</delete>
+	
+	<!-- 修改订单状态（支付） -->
+	<update id="updateOrder">
+		update t_order set isPay=1 where order_num = #{orderNum}
+	</update>
+</mapper>
